@@ -1,6 +1,6 @@
 # Asimov-NodeJS
 
-Projet Asimov en JavaScript avec l'aide de NodeJS dans le cadre de l'épreuve E5 du BTS SIO option SLAM
+Projet de gestion scolaire (similaire à Pronote ou à l'ENT) en JavaScript avec l'aide de NodeJS dans le cadre de l'épreuve E5 du BTS SIO option SLAM
 
 **Diagramme de classe UML**
 
