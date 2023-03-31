@@ -4,7 +4,7 @@ Projet de gestion scolaire (similaire à Pronote ou à l'ENT) en JavaScript avec
 
 **Diagramme de classe UML**
 
-![image](https://user-images.githubusercontent.com/102042317/226562365-38e48298-ecde-4e5b-a8b3-35fe0ce6c98f.png)
+![image](https://user-images.githubusercontent.com/102042317/229112692-fef2121c-5612-42b4-9cd1-ea9d6e4c9a5a.png)
 
 **Diagramme de cas d'utilisation**
 
