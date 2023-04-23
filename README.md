@@ -1,6 +1,6 @@
 # Asimov-NodeJS
 
-Projet de gestion scolaire (similaire à Pronote ou à l'ENT) en PHP avec l'aide d'un serveur web WAMP (solution temporaire pour une éventuelle migraion vers un serveur NodeJS) dans le cadre de l'épreuve E5 du BTS SIO option SLAM
+Projet de gestion scolaire (similaire à Pronote ou à l'ENT) en PHP avec l'aide d'un serveur web WAMP (solution temporaire) dans le cadre de l'épreuve E5 du BTS SIO option SLAM
 
 **Diagramme de classe UML**
 
