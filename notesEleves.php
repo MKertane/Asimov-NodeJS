@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
+    </script>
 </head>
 <body>
     <form method="post">
@@ -37,38 +40,36 @@
         die("LES PROBLEMES :" . $e->getMessage());
     }
 
-    
     ?>
 
     <h1>Vos notes</h1>
 
     <?php
     $sessionEleve = $_SESSION["idEleve"];
-    $pdo = new PDO('mysql:host=localhost;dbname=epokamission;charset=utf8', 'root', '');
-    $req = "SELECT matiere.nom AS idMatiere, note.noteEval FROM note JOIN matiere ON note.idMatiere = matiere.id WHERE idEleve = $sessionEleve ORDER BY matiere.nom";
+    $pdo = new PDO('mysql:host=localhost;dbname=asimov;charset=utf8', 'root', '');
+    $req = "SELECT matiere.nom AS idMatiere, note.noteEval 
+        FROM note 
+        JOIN matiere ON note.idMatiere = matiere.id 
+        WHERE idEleve = $sessionEleve
+        ORDER BY matiere.nom";
     $stmt = $pdo->prepare($req);
     $stmt->execute();
 
-    if (!$stmt) {
-        echo "\nPDO::errorInfo():\n";
-        print_r($pdo->errorInfo());
-        exit;
-    }
-
     // Afficher les informations dans un tableau HTML
     ?>
-    
     <table>
         <tr>
-            <th>Matière</th>
-            <th>Note</th>
+            <th>Matière<th>
+            <th>Note<th>
         </tr>
-        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-        <tr>
-            <td><?php echo $row['idMatiere']; ?></td>
-            <td><?php echo $row['noteEval']; ?></td>
-        </tr>
-        <?php endwhile; ?>
     </table>
+    
+    <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        echo "<tr>";
+        echo "<td>" . $row["idMatiere"] . "</td>";
+        echo "<td>" . $row["noteEval"] . "</td>";
+        echo "<tr>";
+    }
+    ?>
 </body>
 </html>
