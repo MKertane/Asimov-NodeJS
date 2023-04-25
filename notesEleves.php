@@ -35,6 +35,27 @@
     catch(Exception $e){
         die("LES PROBLEMES :" . $e->getMessage());
     }
+
+    
     ?>
+
+    <h1>Vos notes</h1>
+
+    <?php
+    $sessionEleve = $_SESSION["idEleve"];
+    $pdo = new PDO('mysql:host=localhost;dbname=epokamission;charset=utf8', 'root', '');
+    $req = "SELECT matiere.id, note.idMatiere, note.noteEval FROM note JOIN matiere ON note.idMatiere = matiere.id WHERE idEleve = $sessionEleve";
+    $stmt = $pdo->prepare($req);
+    $stmt->execute();
+
+    // Afficher les informations dans un tableau HTML
+    ?>
+    
+    <table>
+        <tr>
+            <th>Matière</th>
+            <th>Note</th>
+        </tr>
+    </table>
 </body>
 </html>
