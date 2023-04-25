@@ -13,6 +13,7 @@
     <form method="post">
         <input type="submit" name="deconnexion" value="Se déconnecter">
     </form>
+
     <?php
     session_start();
     if (isset ($_SESSION ["error"]) && ($_SESSION ["error"]!=""))
@@ -57,19 +58,22 @@
 
     // Afficher les informations dans un tableau HTML
     ?>
+
     <table>
-        <tr>
-            <th>Matière<th>
-            <th>Note<th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Matière</th>
+                <th>Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) { ?>
+                <tr>
+                    <td><?php echo $row["idMatiere"] ?></td>
+                    <td><?php echo $row["noteEval"] ?></td>
+                </tr>
+            <?php } ?>
+        </tbody>
     </table>
-    
-    <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        echo "<tr>";
-        echo "<td>" . $row["idMatiere"] . "</td>";
-        echo "<td>" . $row["noteEval"] . "</td>";
-        echo "<tr>";
-    }
-    ?>
 </body>
 </html>
