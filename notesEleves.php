@@ -45,9 +45,15 @@
     <?php
     $sessionEleve = $_SESSION["idEleve"];
     $pdo = new PDO('mysql:host=localhost;dbname=epokamission;charset=utf8', 'root', '');
-    $req = "SELECT matiere.nom AS idMatiere, note.noteEval FROM note JOIN matiere ON note.idMatiere = matiere.id WHERE idEleve = $sessionEleve";
+    $req = "SELECT matiere.nom AS idMatiere, note.noteEval FROM note JOIN matiere ON note.idMatiere = matiere.id WHERE idEleve = $sessionEleve ORDER BY matiere.nom";
     $stmt = $pdo->prepare($req);
     $stmt->execute();
+
+    if (!$stmt) {
+        echo "\nPDO::errorInfo():\n";
+        print_r($pdo->errorInfo());
+        exit;
+    }
 
     // Afficher les informations dans un tableau HTML
     ?>
@@ -57,13 +63,12 @@
             <th>Matière</th>
             <th>Note</th>
         </tr>
-        <?php
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo "<tr>";
-            echo "<td>" . $row['nom'] . "</td>";
-            echo "<td>" . $row['noteEval'] . "</td>";
-        }
-        ?>
+        <?php while ($row = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+        <tr>
+            <td><?php echo $row['idMatiere']; ?></td>
+            <td><?php echo $row['noteEval']; ?></td>
+        </tr>
+        <?php endwhile; ?>
     </table>
 </body>
 </html>
