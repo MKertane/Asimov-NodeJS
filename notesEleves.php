@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Asimov - Notes de l'élève</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    
+</head>
+    
 </head>
 <body>
     <form method="post">
@@ -42,8 +45,7 @@
     }
 
     ?>
-
-    <h1>Vos notes</h1>
+    <h1>Vos notes (Sur un tableau)</h1>
 
     <?php
     $sessionEleve = $_SESSION["idEleve"];
@@ -58,7 +60,6 @@
 
     // Afficher les informations dans un tableau HTML
     ?>
-
     <table>
         <thead>
             <tr>
@@ -75,5 +76,14 @@
             <?php } ?>
         </tbody>
     </table>
+
+    <h1>Vos notes (sur un graphique)</h1>
+
+    
+    <div>
+        <canvas id="notesGraphique"></canvas>
+    </div>
+    <script src="notesGraphique.js"></script>
+
 </body>
 </html>
