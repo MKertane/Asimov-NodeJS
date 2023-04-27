@@ -25,16 +25,19 @@
 
     try {
         
+        // Redirection si l'utilisateur ne s'est pas authentifié
         if (!isset($_SESSION["idProf"]) && !isset($_SESSION["motDePasse"])) {
             header("location: authentificationProf.php");
         }
 
+        // Déconnexion de l'utilisateur
         if (isset($_POST["deconnexion"])) {
             session_destroy();
             header("location: authentificationProf.php");
             $_SESSION = [];
         }
 
+        // Ajouter un élève dans la base de données
         if (isset($_POST["ajouter"])) {
             if (isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["motDePasse"]) && isset($_POST["classe"])) {
                 $pdo = new PDO('mysql:host=localhost;dbname=asimov;charset=utf8', 'root', '');
@@ -75,7 +78,7 @@
         Nom de l'élève : <input type="text" name="nom" required>
         Prénom de l'élève : <input type="text" name="prenom" required>
         MDP de l'élève : <input type="text" name="motDePasse" required>
-        Classe : <select name="classe" id="classe">
+        Classe : <select name="classe" id="classe" required>
             <?php
             $reponse = $pdo->query('SELECT nom FROM classe');
             while ($donnees = $reponse->fetch()) {
