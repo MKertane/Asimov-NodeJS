@@ -48,6 +48,7 @@
                 $stmt->bindParam(":prenom", $prenom, PDO::PARAM_STR);
                 $stmt->bindParam(":motDePasse", $motDePasse, PDO::PARAM_STR);
                 $stmt->bindParam(":idClasse", $classe, PDO::PARAM_INT);
+                $_SESSION ["info"] = "Élève ajouté avec succès";
                 try {
                     $stmt->execute();
                 }
