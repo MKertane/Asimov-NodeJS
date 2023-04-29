@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epoka - Connexion</title>
+    <title>Asimov - Connexion Professeur</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -38,12 +38,16 @@
             $stmt->bindParam(":motDePasse", $motDePasse, PDO::PARAM_STR);
             $stmt->execute();
             if ($row = $stmt->fetch()) {
+            
+                $_SESSION["idProf"] = $row["idProf"];
+                $_SESSION["motDePasse"] = $row["motDePasse"];
+                $_SESSION["estReferent"] = $row["estReferent"];
+                $_SESSION["accesAlpha"] = $row["accesAlpha"];
+                $_SESSION["accesBeta"] = $row["accesBeta"];
                 
-                $nom = $row["nom"];
-                $prenom = $row["prenom"];
-
-                $_SESSION["idProf"] = $id;       
+                header("location: accueilProf.php");     
             }
+            
             else {echo("Identifiant ou mot de passe incorrect");}
             
         }
