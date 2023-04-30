@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asimov - Ajouter une note (Alpha) </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <form method="post">
@@ -45,7 +47,6 @@
                 $sql = "INSERT INTO note (idEleve, idMatiere, idProf, noteEval) VALUES (:eleve, :matiere, :prof, :note)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(":eleve", $eleve, PDO::PARAM_INT);
-                $stmt->bindParam(":matiere", $matiere, PDO::PARAM_INT);
                 $stmt->bindParam(":note", $note, PDO::PARAM_STR); 
                 $stmt->bindParam(":prof", $idProf, PDO::PARAM_INT);
                 $stmt->bindParam(":matiere", $idMatiere, PDO::PARAM_INT);
@@ -55,6 +56,7 @@
                 catch(Exception $e){
                     die("LES PROBLEMES :" . $e->getMessage());
                 }
+                $_SESSION ["info"]="Note ajoutée avec succès";
             }  
         }
     }
@@ -64,7 +66,7 @@
     }   
     ?>
 
-    <h1>Ajouter une note (sur n'importe quelle matière)</h1>
+    <h1>Ajouter une note</h1>
 
     <?php
     $pdo = new PDO('mysql:host=localhost;dbname=asimov;charset=utf8', 'root', '');
