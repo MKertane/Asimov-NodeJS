@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Asimov - Ajouter un PProfesseur</title>
+    <title>Asimov - Ajouter un Professeur</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js">
     </script>
@@ -44,29 +44,29 @@
                 $nom = $_POST["nom"];
                 $prenom = $_POST["prenom"];
                 $motDePasse = $_POST["motDePasse"];
-                $matiere = $_POST["matiere"];
-                $accesAlpha = $_POST["accesAlpha"];
+                $idMatiere = $_POST["idMatiere"];
                 $accesBeta = $_POST["accesBeta"];
+                $accesAlpha = $_POST["accesAlpha"];                
                 $estReferent = $_POST["estReferent"];
-                $sql = "INSERT INTO professeur (nom, prenom, motDePasse, idMatiere, accesBeta, accesAlpha, estReferent)  
-                VALUES (:nom, :prenom, :motDePasse, :matiere, :accesBeta, :accesAlpha, :estReferent)";
+                $sql = "INSERT INTO professeur (nom, prenom, motDePasse, idMatiere, accesBeta, accesAlpha, estReferent)
+                VALUES (:nom, :prenom, :motDePasse, :idMatiere, :accesBeta, :accesAlpha, :estReferent)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(":nom", $nom, PDO::PARAM_STR);
                 $stmt->bindParam(":prenom", $prenom, PDO::PARAM_STR);
                 $stmt->bindParam(":motDePasse", $motDePasse, PDO::PARAM_STR);
-                $stmt->bindParam(":matiere", $matiere, PDO::PARAM_STR);
+                $stmt->bindParam(":idMatiere", $idMatiere, PDO::PARAM_STR);
                 $stmt->bindParam(":accesBeta", $accesBeta, PDO::PARAM_BOOL);
                 $stmt->bindParam(":accesAlpha", $accesAlpha, PDO::PARAM_BOOL);
                 $stmt->bindParam(":estReferent", $estReferent, PDO::PARAM_BOOL);
-                
+                $_SESSION ["info"] = "Professeur ajouté avec succès";
+
                 try {
                     $stmt->execute();
                 }
+
                 catch(Exception $e){
                     die("LES PROBLEMES :" . $e->getMessage());
-                }
-
-                $_SESSION ["info"] = "Professeur ajouté avec succès";
+                }    
             }  
         }
     }
@@ -81,13 +81,14 @@
     <?php
     $pdo = new PDO('mysql:host=localhost;dbname=asimov;charset=utf8', 'root', '');
     ?>
+
     <!-- FORMULAIRE D'AJOUT D'UN PROFESSEUR -->
     <form method="post">
         
         Nom du professeur : <input type="text" name="nom" required>
         Prénom du professeur : <input type="text" name="prenom" required>
         MDP du professeur : <input type="text" name="motDePasse" required>
-        Matière : <select name="matiere" id="matiere" required>
+        Matière : <select name="idMatiere" id="idMatiere" required>
             <?php
             $reponse = $pdo->query('SELECT * FROM matiere');
             while ($donnees = $reponse->fetch()) {
@@ -98,15 +99,15 @@
 			<?php } ?>
         </select>
         <br>
-        <label for="accesBeta">Accès Beta :</label>
+        <label for="BETA">Accès Beta :</label>
         <input type="radio" name="accesBeta" value="1">Oui
         <input type="radio" name="accesBeta" value="0">Non
         <br>
-        <label for="accesAlpha">Accès Alpha :</label>
+        <label for="ALPHA">Accès Alpha :</label>
         <input type="radio" name="accesAlpha" value="1">Oui
         <input type="radio" name="accesAlpha" value="0">Non
         <br>
-        <label for="estReferent">Prof référent :</label>
+        <label for="REFERENT">Professeur référent :</label>
         <input type="radio" name="estReferent" value="1">Oui
         <input type="radio" name="estReferent" value="0">Non
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epoka - Connexion</title>
+    <title>Asimov - Connexion Élève</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -29,6 +29,7 @@
 
 
         if (isset($_POST["id"]) && isset($_POST["motDePasse"])) {
+               
             $pdo = new PDO('mysql:host=localhost;dbname=asimov;charset=utf8', 'root', '');
             $id = $_POST["id"];
             $motDePasse = $_POST["motDePasse"];
@@ -37,17 +38,20 @@
             $stmt->bindParam(":idEleve", $id, PDO::PARAM_STR);
             $stmt->bindParam(":motDePasse", $motDePasse, PDO::PARAM_STR);
             $stmt->execute();
+            header("location: notesEleves.php"); 
             if ($row = $stmt->fetch()) {
                 
                 $nom = $row["nom"];
                 $prenom = $row["prenom"];
 
-                $_SESSION["idEleve"] = $id;       
+                $_SESSION["idEleve"] = $id;
+                $_SESSION["nom"] = $nom;
+                $_SESSION["prenom"] = $prenom;    
+
             }
             else {echo("Identifiant ou mot de passe incorrect");}
-            
         }
-                
+        
     }  
 
     catch(Exception $e){
@@ -67,7 +71,7 @@
     <?php
     }
     else { ?>
-        <form name="epoka_authentification" method="post">
+        <form name="asimov_authentification" method="post">
         Identifiant : <input type="number" name="id" min="1" required/>
         Mot de passe : <input type="password" name="motDePasse" required/>
         <p><input type="submit" value="Se connecter"></p>

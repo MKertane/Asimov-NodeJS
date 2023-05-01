@@ -71,7 +71,7 @@
     <?php
     }
     else { ?>
-        <form name="epoka_authentification" method="post">
+        <form name="asimov_authentification" method="post">
         Identifiant : <input type="number" name="id" min="1" required/>
         Mot de passe : <input type="password" name="motDePasse" required/>
         <p><input type="submit" value="Se connecter"></p>
